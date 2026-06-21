@@ -1,0 +1,152 @@
+[
+  {
+    "id": "HP-01",
+    "type": "happy_path",
+    "description": "Find brake pads for a specific vehicle",
+    "input": "Do you have brake pads for a Bajaj Pulsar 150?",
+    "expected": {
+      "must_contain": ["pulsar 150", "stock", "inr"],
+      "must_not_contain": ["i don't know", "i cannot"]
+    }
+  },
+  {
+    "id": "HP-02",
+    "type": "happy_path",
+    "description": "Check stock for a known SKU",
+    "input": "Check stock for BRK-1042",
+    "expected": {
+      "must_contain": ["brk-1042", "stock"],
+      "must_not_contain": ["not found", "error"]
+    }
+  },
+  {
+    "id": "HP-03",
+    "type": "happy_path",
+    "description": "Cheapest product in a category",
+    "input": "What's the cheapest chain lube you stock?",
+    "expected": {
+      "must_contain": ["inr"],
+      "must_not_contain": ["i don't know"]
+    }
+  },
+  {
+    "id": "HP-04",
+    "type": "happy_path",
+    "description": "Place a valid order",
+    "input": "Place an order for 2 units of BRK-1042 for ABC Motors",
+    "expected": {
+      "must_contain": ["ord-", "abc motors"],
+      "must_not_contain": ["failed", "error"]
+    }
+  },
+  {
+    "id": "HP-05",
+    "type": "happy_path",
+    "description": "Find parts by vehicle — KTM",
+    "input": "Show me parts for KTM Duke 390",
+    "expected": {
+      "must_contain": ["duke 390", "inr"],
+      "must_not_contain": ["no parts found"]
+    }
+  },
+  {
+    "id": "AMB-01",
+    "type": "ambiguous",
+    "description": "Ambiguous — no vehicle specified for tyres",
+    "input": "I need tyres.",
+    "expected": {
+      "must_contain": ["?"],
+      "must_not_contain": []
+    }
+  },
+  {
+    "id": "AMB-02",
+    "type": "ambiguous",
+    "description": "Ambiguous — brake pads with no vehicle",
+    "input": "I need brake pads",
+    "expected": {
+      "must_contain": ["?"],
+      "must_not_contain": ["confirmed"]
+    }
+  },
+  {
+    "id": "AMB-03",
+    "type": "ambiguous",
+    "description": "Order without dealer name",
+    "input": "Order 3 units of CHN-1037",
+    "expected": {
+      "must_contain": ["?"],
+      "must_not_contain": ["ord-"]
+    }
+  },
+  {
+    "id": "OOS-01",
+    "type": "out_of_scope",
+    "description": "Weather query — must decline",
+    "input": "What's the weather today?",
+    "expected": {
+      "must_contain": ["only"],
+      "must_not_contain": ["sunny", "temperature"]
+    }
+  },
+  {
+    "id": "OOS-02",
+    "type": "out_of_scope",
+    "description": "Unrelated general knowledge",
+    "input": "Who won the cricket World Cup?",
+    "expected": {
+      "must_contain": ["only"],
+      "must_not_contain": ["india", "australia", "england"]
+    }
+  },
+  {
+    "id": "OOS-03",
+    "type": "out_of_scope",
+    "description": "Competitor product recommendation",
+    "input": "Where can I buy cheaper parts online?",
+    "expected": {
+      "must_contain": ["only"],
+      "must_not_contain": ["amazon", "flipkart"]
+    }
+  },
+  {
+    "id": "TRK-01",
+    "type": "tricky",
+    "description": "Nonexistent SKU",
+    "input": "Check stock for XYZ-9999",
+    "expected": {
+      "must_contain": ["not found"],
+      "must_not_contain": ["confirmed"]
+    }
+  },
+  {
+    "id": "TRK-02",
+    "type": "tricky",
+    "description": "Order quantity exceeds stock",
+    "input": "Order 10000 units of BRK-1042 for Test Motors",
+    "expected": {
+      "must_contain": ["stock"],
+      "must_not_contain": ["ord-"]
+    }
+  },
+  {
+    "id": "TRK-03",
+    "type": "tricky",
+    "description": "Universal fitment part query",
+    "input": "Do you have any universal parts?",
+    "expected": {
+      "must_contain": ["universal"],
+      "must_not_contain": ["no parts found"]
+    }
+  },
+  {
+    "id": "TRK-04",
+    "type": "tricky",
+    "description": "Price comparison across category",
+    "input": "What engine oil brands do you carry and what are their prices?",
+    "expected": {
+      "must_contain": ["oil", "inr"],
+      "must_not_contain": ["i don't know"]
+    }
+  }
+]

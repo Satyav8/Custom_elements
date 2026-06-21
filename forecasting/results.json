@@ -1,0 +1,8 @@
+{
+  "holdout_weeks": 4,
+  "model": "Prophet",
+  "baseline": "Seasonal Naive (lag-52 weeks)",
+  "overall": {
+    "baseline_mae": 9.983,
+    "model_mae": 7.146,
+    "skus_beat": 

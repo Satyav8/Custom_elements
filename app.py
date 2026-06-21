@@ -52,7 +52,14 @@ if user_input:
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            response = st.session_state.agent.chat(user_input)
+            try:
+                response = st.session_state.agent.chat(user_input)
+            except Exception as e:
+                err = str(e)
+                if "rate_limit" in err.lower() or "429" in err:
+                    response = "⚠️ Rate limit reached. Please wait a minute and try again."
+                else:
+                    response = f"⚠️ Error: {err}"
         st.markdown(response)
 
     st.session_state.messages.append({"role": "assistant", "content": response})

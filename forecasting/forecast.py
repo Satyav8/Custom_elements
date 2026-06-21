@@ -137,8 +137,10 @@ def run():
         "per_sku": all_results,
     }
 
-    with open(RESULTS_PATH, "w") as f:
+    tmp = RESULTS_PATH + ".tmp"
+    with open(tmp, "w") as f:
         json.dump(output, f, indent=2)
+    os.replace(tmp, RESULTS_PATH)
     print(f"\nResults saved to {RESULTS_PATH}")
 
 

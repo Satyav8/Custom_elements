@@ -14,7 +14,16 @@ _collection = None
 def _get_model():
     global _model
     if _model is None:
-        _model = SentenceTransformer("all-MiniLM-L6-v2")
+        import os, sys
+        os.environ["TOKENIZERS_PARALLELISM"] = "false"
+        # Suppress tqdm stderr output (causes OSError in Streamlit on Windows)
+        old_stderr = sys.stderr
+        sys.stderr = open(os.devnull, "w")
+        try:
+            _model = SentenceTransformer("all-MiniLM-L6-v2")
+        finally:
+            sys.stderr.close()
+            sys.stderr = old_stderr
     return _model
 
 
@@ -44,7 +53,7 @@ def _get_collection():
         df["description"]
     ).tolist()
 
-    embeddings = model.encode(texts, show_progress_bar=True).tolist()
+    embeddings = model.encode(texts, show_progress_bar=False).tolist()
 
     _collection = client.create_collection("catalogue", metadata={"hnsw:space": "cosine"})
     _collection.add(

@@ -5,4 +5,39 @@
   "overall": {
     "baseline_mae": 9.983,
     "model_mae": 7.146,
-    "skus_beat": 
+    "skus_beat": 25,
+    "skus_total": 30
+  },
+  "per_sku": [
+    {"sku": "BRK-1015", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 6.5, "model_mae": 2.09, "beats_baseline": true},
+    {"sku": "BRK-1036", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 4.75, "model_mae": 3.14, "beats_baseline": true},
+    {"sku": "BRK-1040", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 7.5, "model_mae": 5.21, "beats_baseline": true},
+    {"sku": "BRK-1041", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 15.25, "model_mae": 13.47, "beats_baseline": true},
+    {"sku": "BRK-1054", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 15.0, "model_mae": 9.56, "beats_baseline": true},
+    {"sku": "BRK-1074", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 13.75, "model_mae": 4.8, "beats_baseline": true},
+    {"sku": "BRK-1083", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 22.75, "model_mae": 6.54, "beats_baseline": true},
+    {"sku": "BRK-1087", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 9.0, "model_mae": 10.51, "beats_baseline": false},
+    {"sku": "BRK-1092", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 17.75, "model_mae": 9.73, "beats_baseline": true},
+    {"sku": "CHN-1005", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 8.5, "model_mae": 2.54, "beats_baseline": true},
+    {"sku": "CHN-1023", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 11.25, "model_mae": 3.25, "beats_baseline": true},
+    {"sku": "CHN-1029", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 4.25, "model_mae": 3.92, "beats_baseline": true},
+    {"sku": "CHN-1043", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 3.5, "model_mae": 6.26, "beats_baseline": false},
+    {"sku": "CHN-1046", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 7.0, "model_mae": 0.83, "beats_baseline": true},
+    {"sku": "CHN-1048", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 14.25, "model_mae": 7.88, "beats_baseline": true},
+    {"sku": "CHN-1054", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 20.5, "model_mae": 16.15, "beats_baseline": true},
+    {"sku": "CHN-1059", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 18.25, "model_mae": 17.95, "beats_baseline": true},
+    {"sku": "ELE-1012", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 16.75, "model_mae": 10.73, "beats_baseline": true},
+    {"sku": "ELE-1026", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 7.5, "model_mae": 7.3, "beats_baseline": true},
+    {"sku": "ELE-1081", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 3.0, "model_mae": 5.16, "beats_baseline": false},
+    {"sku": "FIL-1001", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 8.0, "model_mae": 5.85, "beats_baseline": true},
+    {"sku": "FIL-1023", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 14.5, "model_mae": 5.09, "beats_baseline": true},
+    {"sku": "FIL-1024", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 3.5, "model_mae": 2.53, "beats_baseline": true},
+    {"sku": "FIL-1040", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 12.5, "model_mae": 26.38, "beats_baseline": false},
+    {"sku": "FIL-1042", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 4.0, "model_mae": 2.66, "beats_baseline": true},
+    {"sku": "FIL-1050", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 6.5, "model_mae": 1.17, "beats_baseline": true},
+    {"sku": "GRP-1003", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 3.75, "model_mae": 3.06, "beats_baseline": true},
+    {"sku": "GRP-1056", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 4.25, "model_mae": 2.24, "beats_baseline": true},
+    {"sku": "OIL-1002", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 11.5, "model_mae": 8.76, "beats_baseline": true},
+    {"sku": "OIL-1006", "train_weeks": 74, "test_weeks": 4, "baseline_mae": 4.0, "model_mae": 9.61, "beats_baseline": false}
+  ]
+}

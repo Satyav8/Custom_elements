@@ -51,15 +51,21 @@ def _run_tool(name: str, args: dict) -> dict:
 
 
 def _call_with_retry(messages):
-    for attempt in range(_MAX_RETRIES):
-        try:
-            result = _llm_call(messages)
-            return result["_raw"], result
-        except Exception as e:
-            if "tool_use_failed" in str(e) and attempt < _MAX_RETRIES - 1:
-                time.sleep(1)
-                continue
-            raise
+    models_to_try = [_MODEL, "llama-3.1-8b-instant"]  # fallback if rate limited
+    for model in models_to_try:
+        for attempt in range(_MAX_RETRIES):
+            try:
+                result = _llm_call(messages, model=model)
+                return result["_raw"], result
+            except Exception as e:
+                err = str(e)
+                if "tool_use_failed" in err and attempt < _MAX_RETRIES - 1:
+                    time.sleep(1)
+                    continue
+                if "rate_limit_exceeded" in err or "429" in err:
+                    break  # try next model
+                raise
+    raise RuntimeError("All models rate limited. Please wait a few minutes and try again.")
 
 
 class DealerAgent:

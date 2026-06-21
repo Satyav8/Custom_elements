@@ -106,7 +106,16 @@ Multi-turn context is maintained this way across the session. A "New Conversatio
 
 **MAE** (Mean Absolute Error): preferred over RMSE because it's robust to the occasional large spike from promotions. MAPE is also reported but excluded from primary ranking because it's undefined when true values are 0.
 
+### Results (actual run)
+
+| Metric | Seasonal Naive Baseline | Prophet |
+|---|---|---|
+| Overall MAE | 9.98 | 7.15 |
+| SKUs beating baseline | — | 25 / 30 (83%) |
+
+Prophet beats the baseline on 25 out of 30 SKUs. The 5 SKUs where it underperforms are low-volume, noisy series where the seasonal pattern is weak and the naive "same week last year" guess is hard to beat.
+
 ### Limitations
 
-- With only 78 weeks (< 2 full years), Prophet has limited data to estimate yearly seasonality. More data would improve accuracy significantly.
-- Per-SKU models don't share information across similar SKUs. A hierarchical model (e.g. grouped Prophet or LightGBM with shared lag features) would be the next step.
+- With only 78 weeks (< 2 full years), Prophet has limited data to estimate yearly seasonality reliably.
+- Per-SKU models don't share information across similar SKUs. A hierarchical model (e.g. LightGBM with shared lag features) would be the natural next step.

@@ -61,4 +61,13 @@ Bot:  I can only help with auto-parts queries. How can I assist you with parts?
 - Vehicle fitment matching uses substring search + semantic fallback.
 - ChromaDB index is stored in `data/chroma_db/` and persists across runs.
 
+## Forecasting Results (Part B)
+
+| Model | Overall MAE | SKUs beat baseline |
+|---|---|---|
+| Seasonal Naive (baseline) | 9.98 | — |
+| Prophet | 7.15 | 25/30 (83%) |
+
+Holdout: last 4 weeks per SKU. No data leakage — strict temporal split.
+
 See [DESIGN.md](DESIGN.md) for architecture decisions and [eval/results.json](eval/results.json) for evaluation output.

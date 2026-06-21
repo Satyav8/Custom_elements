@@ -1,24 +1,24 @@
 {
   "summary": {
     "total": 15,
-    "pass": 1,
-    "fail": 14,
+    "pass": 8,
+    "fail": 7,
     "by_type": {
       "happy_path": {
         "pass": 1,
         "fail": 4
       },
       "ambiguous": {
-        "pass": 0,
-        "fail": 3
+        "pass": 2,
+        "fail": 1
       },
       "out_of_scope": {
-        "pass": 0,
-        "fail": 3
+        "pass": 3,
+        "fail": 0
       },
       "tricky": {
-        "pass": 0,
-        "fail": 4
+        "pass": 2,
+        "fail": 2
       }
     }
   },
@@ -28,19 +28,23 @@
       "type": "happy_path",
       "description": "Find brake pads for a specific vehicle",
       "input": "Do you have brake pads for a Bajaj Pulsar 150?",
-      "response": "Yes, we have brake pads for a Bajaj Pulsar 150. The SKU is BRK-1002, and it costs INR 1460. There are 136 in stock.",
-      "passed": true,
-      "failures": []
+      "response": "Do you want brake pads for Bajaj Pulsar 150? For which Bajaj Pulsar 150 model (e.g. Pulsar 150, Avenger, etc.)?\n\n(function=find_parts_by_vehicle>{\"make_model\": \"Bajaj Pulsar 150\"}",
+      "passed": false,
+      "failures": [
+        "Missing: 'stock'",
+        "Missing: 'inr'"
+      ]
     },
     {
       "id": "HP-02",
       "type": "happy_path",
       "description": "Check stock for a known SKU",
       "input": "Check stock for BRK-1042",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99571, Requested 1336. Please try again in 13m3.648s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "response": "Unfortunately, the tool doesn't provide information about the given SKU. It seems that the given SKU is not available or the tool was unable to retrieve the information.",
       "passed": false,
       "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99571, Requested 1336. Please try again in 13m3.648s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+        "Missing: 'brk-1042'",
+        "Missing: 'stock'"
       ]
     },
     {
@@ -48,21 +52,19 @@
       "type": "happy_path",
       "description": "Cheapest product in a category",
       "input": "What's the cheapest chain lube you stock?",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99570, Requested 1325. Please try again in 12m53.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "passed": false,
-      "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99570, Requested 1325. Please try again in 12m53.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-      ]
+      "response": "The cheapest chain lube is INR 365 for either CHN-1052 or CHN-1053, both of which are in stock (77 and 380 units, respectively).",
+      "passed": true,
+      "failures": []
     },
     {
       "id": "HP-04",
       "type": "happy_path",
       "description": "Place a valid order",
       "input": "Place an order for 2 units of BRK-1042 for ABC Motors",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99568, Requested 1359. Please try again in 13m20.928s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "response": "Order confirmed. Order ID: ORD-F8A1B2A0. Total: INR 4940.",
       "passed": false,
       "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99568, Requested 1359. Please try again in 13m20.928s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+        "Missing: 'abc motors'"
       ]
     },
     {
@@ -70,10 +72,11 @@
       "type": "happy_path",
       "description": "Find parts by vehicle \u00e2\u20ac\u201d KTM",
       "input": "Show me parts for KTM Duke 390",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99567, Requested 1339. Please try again in 13m2.784s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "response": "Please let me know which part(s) you would like to order and from which stock.",
       "passed": false,
       "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99567, Requested 1339. Please try again in 13m2.784s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+        "Missing: 'duke 390'",
+        "Missing: 'inr'"
       ]
     },
     {
@@ -81,32 +84,28 @@
       "type": "ambiguous",
       "description": "Ambiguous \u00e2\u20ac\u201d no vehicle specified for tyres",
       "input": "I need tyres.",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99566, Requested 1356. Please try again in 13m16.608s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "passed": false,
-      "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99566, Requested 1356. Please try again in 13m16.608s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-      ]
+      "response": "For which vehicle?",
+      "passed": true,
+      "failures": []
     },
     {
       "id": "AMB-02",
       "type": "ambiguous",
       "description": "Ambiguous \u00e2\u20ac\u201d brake pads with no vehicle",
       "input": "I need brake pads",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99564, Requested 1251. Please try again in 11m44.16s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "passed": false,
-      "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99564, Requested 1251. Please try again in 11m44.16s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-      ]
+      "response": "For which vehicle?",
+      "passed": true,
+      "failures": []
     },
     {
       "id": "AMB-03",
       "type": "ambiguous",
       "description": "Order without dealer name",
       "input": "Order 3 units of CHN-1037",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99563, Requested 1327. Please try again in 12m48.96s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "response": "Sorry, I'm unable to assist with that as there's no information provided about the catalogue having a part with SKU CHN-1037.",
       "passed": false,
       "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99563, Requested 1327. Please try again in 12m48.96s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+        "Missing: '?'"
       ]
     },
     {
@@ -114,65 +113,55 @@
       "type": "out_of_scope",
       "description": "Weather query \u00e2\u20ac\u201d must decline",
       "input": "What's the weather today?",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99559, Requested 1248. Please try again in 11m37.248s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "passed": false,
-      "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99559, Requested 1248. Please try again in 11m37.248s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-      ]
+      "response": "I can only help with auto-parts queries.",
+      "passed": true,
+      "failures": []
     },
     {
       "id": "OOS-02",
       "type": "out_of_scope",
       "description": "Unrelated general knowledge",
       "input": "Who won the cricket World Cup?",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99557, Requested 1179. Please try again in 10m35.904s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "passed": false,
-      "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99557, Requested 1179. Please try again in 10m35.904s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-      ]
+      "response": "I can only help with auto-parts queries.",
+      "passed": true,
+      "failures": []
     },
     {
       "id": "OOS-03",
       "type": "out_of_scope",
       "description": "Competitor product recommendation",
       "input": "Where can I buy cheaper parts online?",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99555, Requested 1207. Please try again in 10m58.368s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "passed": false,
-      "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99555, Requested 1207. Please try again in 10m58.368s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-      ]
+      "response": "I can only help with auto-parts queries.",
+      "passed": true,
+      "failures": []
     },
     {
       "id": "TRK-01",
       "type": "tricky",
       "description": "Nonexistent SKU",
       "input": "Check stock for XYZ-9999",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99554, Requested 1227. Please try again in 11m14.784s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "passed": false,
-      "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99554, Requested 1227. Please try again in 11m14.784s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-      ]
+      "response": "The SKU XYZ-9999 was not found in the catalogue.",
+      "passed": true,
+      "failures": []
     },
     {
       "id": "TRK-02",
       "type": "tricky",
       "description": "Order quantity exceeds stock",
       "input": "Order 10000 units of BRK-1042 for Test Motors",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99552, Requested 1365. Please try again in 13m12.287999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "passed": false,
-      "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99552, Requested 1365. Please try again in 13m12.287999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
-      ]
+      "response": "Sorry, there was an issue processing your order. Please note that the stock of the required part is only 43, which is much less than the 10000 units you ordered. \n\nWould you like to place a new order with the available stock?",
+      "passed": true,
+      "failures": []
     },
     {
       "id": "TRK-03",
       "type": "tricky",
       "description": "Universal fitment part query",
       "input": "Do you have any universal parts?",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99551, Requested 1211. Please try again in 10m58.368s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "response": "For which vehicle?",
       "passed": false,
       "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99551, Requested 1211. Please try again in 10m58.368s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+        "Missing: 'universal'"
       ]
     },
     {
@@ -180,10 +169,11 @@
       "type": "tricky",
       "description": "Price comparison across category",
       "input": "What engine oil brands do you carry and what are their prices?",
-      "response": "ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99549, Requested 1312. Please try again in 12m23.904s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "response": "I can only help with auto-parts queries.",
       "passed": false,
       "failures": [
-        "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kghney1nfxtvgh5pmk5ahttk` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99549, Requested 1312. Please try again in 12m23.904s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+        "Missing: 'oil'",
+        "Missing: 'inr'"
       ]
     }
   ]

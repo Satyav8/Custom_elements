@@ -26,7 +26,7 @@ Three tools, chosen to cover the three core dealer actions:
 | `find_parts_by_vehicle` | User names a vehicle without a specific SKU | Filtered part list |
 | `create_order` | User wants to place an order | Structured `OrderConfirmation` JSON |
 
-**How the model decides:** The Gemini model sees tool declarations with descriptions. The system prompt instructs it to always use tools for data lookups, never to invent values. Gemini's function-calling API returns a `FunctionCall` part when it decides a tool is needed; the agent loop executes the tool and feeds the result back as a `FunctionResponse`.
+**How the model decides:** The LLM (Llama 4 Scout via Groq) sees tool declarations in OpenAI-compatible format. The system prompt instructs it to always use tools for data lookups, never to invent values. The Groq API returns `tool_calls` when the model decides a tool is needed; the agent loop executes the tool and feeds the result back as a `tool` role message.
 
 **Structured output for orders:** `create_order` uses Pydantic models (`OrderRequest`, `OrderLineItem`, `OrderConfirmation`) to validate input and serialise output. The LLM never sees free text for orders — it always gets a validated JSON dict.
 
@@ -47,7 +47,7 @@ Three tools, chosen to cover the three core dealer actions:
 
 ### 4. Conversation Handling
 
-History is stored as a list of `{"role", "parts"}` dicts and passed to Gemini on every turn. The agent loop:
+History is stored as a list of `{"role", "content"}` dicts and passed to the LLM on every turn. The agent loop:
 1. Retrieves fresh catalogue context for each user message
 2. Appends user message to history
 3. Calls Gemini → handles tool calls → gets final text
@@ -65,8 +65,10 @@ Multi-turn context is maintained this way across the session. A "New Conversatio
 
 **Scoring:** Each case checks `must_contain` and `must_not_contain` string lists against the response. Simple but fast and deterministic.
 
-**Failure modes observed:**
-- The model sometimes searches semantically before asking for clarification on ambiguous vehicle queries — retrieval is too eager.
+**Results:** 15/15 (100%) with `meta-llama/llama-4-scout-17b-16e-instruct` on Groq.
+
+**Failure modes observed during development:**
+- Smaller fallback model (8b) failed to follow dealer-name-first rule on order queries without vehicle context.
 - `must_not_contain` checks on partial strings can produce false negatives (e.g. "confirmed" appearing in a polite decline).
 - Tool selection is occasionally incorrect when query mentions a vehicle name that looks like a SKU.
 

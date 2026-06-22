@@ -18,7 +18,7 @@ from assistant.prompts import SYSTEM_PROMPT
 load_dotenv()
 
 _CLIENT = Groq(api_key=os.environ["GROQ_API_KEY"])
-_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+_MODEL = os.environ.get("GROQ_MODEL", "meta-llama/llama-4-scout-17b-16e-instruct")
 _MAX_RETRIES = 3
 
 
@@ -51,7 +51,7 @@ def _run_tool(name: str, args: dict) -> dict:
 
 
 def _call_with_retry(messages):
-    models_to_try = [_MODEL, "llama-3.1-8b-instant"]  # fallback if rate limited
+    models_to_try = [_MODEL, "llama-3.3-70b-versatile", "llama-3.1-8b-instant"]  # fallback chain
     for model in models_to_try:
         for attempt in range(_MAX_RETRIES):
             try:

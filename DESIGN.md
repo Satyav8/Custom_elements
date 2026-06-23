@@ -50,7 +50,7 @@ Three tools, chosen to cover the three core dealer actions:
 History is stored as a list of `{"role", "content"}` dicts and passed to the LLM on every turn. The agent loop:
 1. Retrieves fresh catalogue context for each user message
 2. Appends user message to history
-3. Calls Gemini → handles tool calls → gets final text
+3. Calls LLM (Groq) → handles tool calls → gets final text
 4. Appends model response to history
 
 Multi-turn context is maintained this way across the session. A "New Conversation" button in the UI resets history.

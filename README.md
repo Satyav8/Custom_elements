@@ -2,6 +2,8 @@
 
 An AI-powered conversational assistant for auto-parts dealers — find parts, check stock, and place orders via natural language.
 
+**GitHub:** https://github.com/Satyav8/Custom_elements | **Author:** Prabhas
+
 ## What's implemented
 
 - **Part A (core):** RAG-based dealer assistant with function calling, multi-turn conversation, and guardrails.
@@ -79,3 +81,7 @@ Holdout: last 4 weeks per SKU. No data leakage — strict temporal split.
 | **Total** | **15/15 (100%)** |
 
 See [DESIGN.md](DESIGN.md) for architecture decisions and [eval/results.json](eval/results.json) for full evaluation output.
+
+---
+
+*Built as part of the VIKMO AI/ML Internship take-home assignment. All evaluation results are reproducible — run `python -m eval.run_eval` to verify.*
